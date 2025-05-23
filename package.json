@@ -1,0 +1,28 @@
+{
+  "name": "messaging-app-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "node --watch app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shukrirahmat/messaging-app-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/shukrirahmat/messaging-app-backend/issues"
+  },
+  "homepage": "https://github.com/shukrirahmat/messaging-app-backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0"
+  }
+}

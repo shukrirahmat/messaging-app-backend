@@ -38,10 +38,15 @@ const logInUser = asyncHandler(async (req, res) => {
       res.json({ success: true, token: token });
     }
   );
+})
 
+const getUser = asyncHandler(async (req, res) => {
+  const user = await db.findUser(req.currentUsername);
+  return res.json(user);
 })
 
 module.exports = {
     signUpUser,
-    logInUser
+    logInUser,
+    getUser
 }

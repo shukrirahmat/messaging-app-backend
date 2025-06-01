@@ -30,20 +30,16 @@ const logInUser = asyncHandler(async (req, res) => {
   if (!pwmatch)
     return res.json({ success: false, message: "Password is incorrect" });
 
-  const payload = jwt.sign(
+  const token = jwt.sign(
     { username: req.body.username },
     process.env.TOKEN_SECRET,
-    { expiresIn: "1h" },
-    (err, token) => {
-      if (err) return { success: false, message: "JWT Token error" };
-      else return { success: true, token: token };
-    }
+    { expiresIn: "1h" }
   );
 
-  if (!payload.success) return res.json(payload);
+  if (!token) return res.json({ success: false, message: "JWT token error" });
   else {
     await db.logUser(req.body.username);
-    return res.json(payload);
+    return res.json({ success: true, token: token});
   }
 });
 

@@ -38,10 +38,15 @@ const logInUser = asyncHandler(async (req, res) => {
 
   if (!token) return res.json({ success: false, message: "JWT token error" });
   else {
-    await db.logUser(req.body.username);
+    await db.logInUser(req.body.username);
     return res.json({ success: true, token: token});
   }
 });
+
+const logOutUser = asyncHandler(async (req, res) => {
+  const user = await db.logOutUser(req.currentUsername);
+  return res.json(user);
+})
 
 const getUser = asyncHandler(async (req, res) => {
   const user = await db.findUser(req.currentUsername);
@@ -52,4 +57,5 @@ module.exports = {
   signUpUser,
   logInUser,
   getUser,
+  logOutUser
 };

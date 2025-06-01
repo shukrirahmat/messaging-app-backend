@@ -22,7 +22,7 @@ async function findUser(username) {
     return user;
 }
 
-async function logUser(username) {
+async function logInUser(username) {
     const user = await prisma.user.update({
         where : {
             username
@@ -36,8 +36,22 @@ async function logUser(username) {
     return user;
 }
 
+async function logOutUser(username) {
+    const user = await prisma.user.update({
+        where : {
+            username
+        },
+        data : {
+            isLoggedIn : false,
+        }
+    })
+
+    return user;
+}
+
 module.exports = {
     createUser,
     findUser,
-    logUser
+    logInUser,
+    logOutUser
 }

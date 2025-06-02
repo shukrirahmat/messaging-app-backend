@@ -54,7 +54,7 @@ const getUser = asyncHandler(async (req, res) => {
 });
 
 const getUserList = asyncHandler(async (req, res) => {
-  const users = await db.getUserList();
+  const users = await db.getUserList(req.currentUsername);
   return res.json(users);
 })
 

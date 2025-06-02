@@ -73,6 +73,9 @@ async function getUserList(username) {
       isLoggedIn: true,
       lastVerified: true,
     },
+    orderBy: {
+        lastVerified: 'desc'
+    }
   });
   return users;
 }

@@ -29,7 +29,7 @@ async function logInUser(username) {
         },
         data : {
             isLoggedIn : true,
-            lastLogDate : new Date()
+            lastVerified : new Date()
         }
     })
 
@@ -49,9 +49,34 @@ async function logOutUser(username) {
     return user;
 }
 
+async function updateLastVerified(username) {
+    const user = await prisma.user.update({
+        where : {
+            username
+        },
+        data : {
+            lastVerified: new Date()
+        }
+    })
+    return user;
+}
+
+async function getUserList() {
+    const users = await prisma.user.findMany({
+        select : {
+            username: true,
+            isLoggedIn: true,
+            lastVerified: true
+        }
+    })
+    return users
+}
+
 module.exports = {
     createUser,
     findUser,
     logInUser,
-    logOutUser
+    logOutUser,
+    getUserList,
+    updateLastVerified
 }

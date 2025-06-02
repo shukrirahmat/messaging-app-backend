@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const asyncHandler = require("express-async-handler");
+const db = require("../db/queries");
 
 const verifyToken = asyncHandler(async (req, res, next) => {
   const bearerHeader = req.headers["authorization"];
@@ -21,6 +22,12 @@ const verifyToken = asyncHandler(async (req, res, next) => {
   }
 });
 
+const updateLastVerified = asyncHandler(async (req, res, next ) => {
+  await db.updateLastVerified(req.currentUsername);
+  next();
+})
+
 module.exports = {
   verifyToken,
+  updateLastVerified
 };

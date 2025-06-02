@@ -19,5 +19,5 @@ model User {
   username String    @unique
   password String
   isLoggedIn Boolean @default(false)
-  lastLogDate DateTime?   
+  lastVerified DateTime?   
 }

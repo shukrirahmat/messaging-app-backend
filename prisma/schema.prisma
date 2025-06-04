@@ -15,9 +15,20 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  username String    @unique
-  password String
-  isLoggedIn Boolean @default(false)
-  lastVerified DateTime?   
+  id           Int       @id @default(autoincrement())
+  username     String    @unique
+  password     String
+  isLoggedIn   Boolean   @default(false)
+  lastVerified DateTime?
+  inbox        Message[] @relation("RecieveMessages")
+  outbox       Message[] @relation("SendMessages")
+}
+
+model Message {
+  id           String @id @default(uuid())
+  content      String
+  sender       User   @relation("SendMessages", fields: [senderName], references: [username])
+  senderName   String
+  receiver     User   @relation("RecieveMessages", fields: [receiverName], references: [username])
+  receiverName String
 }

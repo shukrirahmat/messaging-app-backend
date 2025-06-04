@@ -80,6 +80,19 @@ async function getUserList(username) {
   return users;
 }
 
+async function createMessage(content, sender, receiver) {
+  const message = await prisma.message.create({
+    data: {
+      content,
+      senderName: sender,
+      receiverName: receiver,
+      dateSend: new Date()
+    }
+  })
+
+  return message;
+}
+
 module.exports = {
   createUser,
   findUser,
@@ -87,4 +100,5 @@ module.exports = {
   logOutUser,
   getUserList,
   updateLastVerified,
+  createMessage
 };

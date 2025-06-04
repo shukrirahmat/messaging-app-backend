@@ -31,4 +31,5 @@ model Message {
   senderName   String
   receiver     User   @relation("RecieveMessages", fields: [receiverName], references: [username])
   receiverName String
+  dateSend    DateTime
 }

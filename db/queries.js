@@ -93,6 +93,28 @@ async function createMessage(content, sender, receiver) {
   return message;
 }
 
+async function getChat(user1, user2) {
+  const messages = await prisma.message.findMany({
+    where : {
+      OR : [
+        {
+          senderName: user1,
+          receiverName: user2
+        },
+        {
+          senderName: user1,
+          receiverName: user2
+        }
+      ]
+    },
+    orderBy: {
+      dateSend: 'asc'
+    }
+  })
+
+  return messages;
+}
+
 module.exports = {
   createUser,
   findUser,
@@ -100,5 +122,6 @@ module.exports = {
   logOutUser,
   getUserList,
   updateLastVerified,
-  createMessage
+  createMessage,
+  getChat
 };

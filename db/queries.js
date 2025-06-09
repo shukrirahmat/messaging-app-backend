@@ -102,8 +102,8 @@ async function getChat(user1, user2) {
           receiverName: user2
         },
         {
-          senderName: user1,
-          receiverName: user2
+          senderName: user2,
+          receiverName: user1
         }
       ]
     },

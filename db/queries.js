@@ -22,6 +22,26 @@ async function findUser(username) {
   return user;
 }
 
+async function getUserProfile(username) {
+  const user = await prisma.user.findUnique({
+    where: {
+      username,
+    },
+    select: {
+      username: true,
+      firstName: true,
+      lastName: true,
+      age: true,
+      gender: true,
+      from: true,
+      bio: true,
+      imgUrl: true,
+    },
+  });
+
+  return user;
+}
+
 async function logInUser(username) {
   const user = await prisma.user.update({
     where: {
@@ -65,7 +85,7 @@ async function getUserList(username) {
   const users = await prisma.user.findMany({
     where: {
       NOT: {
-        username: username
+        username: username,
       },
     },
     select: {
@@ -74,8 +94,8 @@ async function getUserList(username) {
       lastVerified: true,
     },
     orderBy: {
-        lastVerified: 'desc'
-    }
+      lastVerified: "desc",
+    },
   });
   return users;
 }
@@ -86,31 +106,31 @@ async function createMessage(content, sender, receiver) {
       content,
       senderName: sender,
       receiverName: receiver,
-      dateSend: new Date()
-    }
-  })
+      dateSend: new Date(),
+    },
+  });
 
   return message;
 }
 
 async function getChat(user1, user2) {
   const messages = await prisma.message.findMany({
-    where : {
-      OR : [
+    where: {
+      OR: [
         {
           senderName: user1,
-          receiverName: user2
+          receiverName: user2,
         },
         {
           senderName: user2,
-          receiverName: user1
-        }
-      ]
+          receiverName: user1,
+        },
+      ],
     },
     orderBy: {
-      dateSend: 'asc'
-    }
-  })
+      dateSend: "asc",
+    },
+  });
 
   return messages;
 }
@@ -118,10 +138,11 @@ async function getChat(user1, user2) {
 module.exports = {
   createUser,
   findUser,
+  getUserProfile,
   logInUser,
   logOutUser,
   getUserList,
   updateLastVerified,
   createMessage,
-  getChat
+  getChat,
 };

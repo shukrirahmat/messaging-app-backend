@@ -22,14 +22,22 @@ model User {
   lastVerified DateTime?
   inbox        Message[] @relation("RecieveMessages")
   outbox       Message[] @relation("SendMessages")
+  firstName    String?
+  lastName     String?
+  age          Int?
+  gender       String?
+  from         String?
+  bio          String?
+  imgUrl       String?
 }
 
+
 model Message {
-  id           String @id @default(uuid())
+  id           String   @id @default(uuid())
   content      String
-  sender       User   @relation("SendMessages", fields: [senderName], references: [username])
+  sender       User     @relation("SendMessages", fields: [senderName], references: [username])
   senderName   String
-  receiver     User   @relation("RecieveMessages", fields: [receiverName], references: [username])
+  receiver     User     @relation("RecieveMessages", fields: [receiverName], references: [username])
   receiverName String
-  dateSend    DateTime
+  dateSend     DateTime
 }

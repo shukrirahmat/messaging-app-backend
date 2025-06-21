@@ -58,10 +58,16 @@ const getUserList = asyncHandler(async (req, res) => {
   return res.json(users);
 })
 
+const getUserProfile = asyncHandler(async (req, res) => {
+  const userProfile = await db.getUserProfile(req.body.username);
+  return res.json(userProfile);
+})
+
 module.exports = {
   signUpUser,
   logInUser,
   getUser,
   logOutUser,
-  getUserList
+  getUserList,
+  getUserProfile
 };

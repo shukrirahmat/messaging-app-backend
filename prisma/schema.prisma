@@ -22,15 +22,13 @@ model User {
   lastVerified DateTime?
   inbox        Message[] @relation("RecieveMessages")
   outbox       Message[] @relation("SendMessages")
-  firstName    String?
-  lastName     String?
+  fullName     String?
   age          Int?
   gender       String?
-  from         String?
+  location     String?
   bio          String?
   imgUrl       String?
 }
-
 
 model Message {
   id           String   @id @default(uuid())

@@ -145,6 +145,8 @@ async function updateProfile(username, fullName, bio, gender, location) {
       location
     },
   });
+
+  return profile
 }
 
 module.exports = {

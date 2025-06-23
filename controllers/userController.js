@@ -39,14 +39,14 @@ const logInUser = asyncHandler(async (req, res) => {
   if (!token) return res.json({ success: false, message: "JWT token error" });
   else {
     await db.logInUser(req.body.username);
-    return res.json({ success: true, token: token});
+    return res.json({ success: true, token: token });
   }
 });
 
 const logOutUser = asyncHandler(async (req, res) => {
   const user = await db.logOutUser(req.currentUsername);
   return res.json(user);
-})
+});
 
 const getUser = asyncHandler(async (req, res) => {
   const user = await db.findUser(req.currentUsername);
@@ -56,12 +56,26 @@ const getUser = asyncHandler(async (req, res) => {
 const getUserList = asyncHandler(async (req, res) => {
   const users = await db.getUserList(req.currentUsername);
   return res.json(users);
-})
+});
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const userProfile = await db.getUserProfile(req.body.username);
   return res.json(userProfile);
-})
+});
+
+const updateProfile = asyncHandler(async (req, res) => {
+  if (req.currentUsername !== req.body.username) return res.sendStatus(403);
+  const dateOfBirth = req.body.dateOfBirth ? new Date(req.body.dateOfBirth) : null;
+  const userProfile = await db.updateProfile(
+    req.currentUsername,
+    req.body.fullName,
+    req.body.bio,
+    dateOfBirth,
+    req.body.gender,
+    req.body.location
+  );
+  return res.json(userProfile);
+});
 
 module.exports = {
   signUpUser,
@@ -69,5 +83,6 @@ module.exports = {
   getUser,
   logOutUser,
   getUserList,
-  getUserProfile
+  getUserProfile,
+  updateProfile
 };

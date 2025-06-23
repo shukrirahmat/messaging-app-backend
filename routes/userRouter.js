@@ -9,5 +9,5 @@ router.post("/", userController.signUpUser);
 router.post("/log-in", userController.logInUser);
 router.post("/log-out", verifyToken, updateLastVerified, userController.logOutUser);
 router.post("/profile", verifyToken, updateLastVerified, userController.getUserProfile);
-
+router.put("/profile", verifyToken, updateLastVerified, userController.updateProfile);
 module.exports = router;

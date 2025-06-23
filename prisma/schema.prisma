@@ -24,6 +24,7 @@ model User {
   outbox       Message[] @relation("SendMessages")
   fullName     String?
   gender       String?
+  dateOfBirth  DateTime?
   location     String?
   bio          String?
   imgUrl       String?

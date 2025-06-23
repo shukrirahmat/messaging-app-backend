@@ -31,7 +31,6 @@ async function getUserProfile(username) {
       username: true,
       fullName: true,
       gender: true,
-      dateOfBirth: true,
       location: true,
       bio: true,
       imgUrl: true,

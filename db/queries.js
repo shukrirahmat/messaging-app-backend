@@ -30,8 +30,8 @@ async function getUserProfile(username) {
     select: {
       username: true,
       fullName: true,
-      age: true,
       gender: true,
+      dateOfBirth: true,
       location: true,
       bio: true,
       imgUrl: true,

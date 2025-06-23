@@ -23,7 +23,6 @@ model User {
   inbox        Message[] @relation("RecieveMessages")
   outbox       Message[] @relation("SendMessages")
   fullName     String?
-  age          Int?
   gender       String?
   location     String?
   bio          String?

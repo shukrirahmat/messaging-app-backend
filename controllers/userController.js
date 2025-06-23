@@ -65,12 +65,10 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 const updateProfile = asyncHandler(async (req, res) => {
   if (req.currentUsername !== req.body.username) return res.sendStatus(403);
-  const dateOfBirth = req.body.dateOfBirth ? new Date(req.body.dateOfBirth) : null;
   const userProfile = await db.updateProfile(
     req.currentUsername,
     req.body.fullName,
     req.body.bio,
-    dateOfBirth,
     req.body.gender,
     req.body.location
   );

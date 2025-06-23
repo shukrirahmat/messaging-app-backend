@@ -134,7 +134,7 @@ async function getChat(user1, user2) {
   return messages;
 }
 
-async function updateProfile(username, fullName, bio, dateOfBirth, gender, location) {
+async function updateProfile(username, fullName, bio, gender, location) {
   const profile = await prisma.user.update({
     where: {
       username,
@@ -142,7 +142,6 @@ async function updateProfile(username, fullName, bio, dateOfBirth, gender, locat
     data: {
       fullName,
       bio,
-      dateOfBirth,
       gender,
       location
     },

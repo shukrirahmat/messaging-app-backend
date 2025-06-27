@@ -37,4 +37,5 @@ model Message {
   receiver     User     @relation("RecieveMessages", fields: [receiverName], references: [username])
   receiverName String
   dateSend     DateTime
+  isRead       Boolean @default(false)
 }

@@ -90,6 +90,15 @@ async function getUserList(username) {
       username: true,
       isLoggedIn: true,
       lastVerified: true,
+      outbox: {
+        where: {
+          receiverName: username,
+          isRead: false
+        },
+        select: {
+          id: true
+        }
+      }
     },
     orderBy: {
       lastVerified: "desc",
@@ -130,6 +139,16 @@ async function getChat(user1, user2) {
     },
   });
 
+  await prisma.message.updateMany({
+    where: {
+      senderName: user2,
+      receiverName: user1,
+    },
+    data: {
+      isRead: true
+    }
+  });
+
   return messages;
 }
 
@@ -142,11 +161,11 @@ async function updateProfile(username, fullName, bio, gender, location) {
       fullName,
       bio,
       gender,
-      location
+      location,
     },
   });
 
-  return profile
+  return profile;
 }
 
 module.exports = {
@@ -159,5 +178,5 @@ module.exports = {
   updateLastVerified,
   createMessage,
   getChat,
-  updateProfile
+  updateProfile,
 };
